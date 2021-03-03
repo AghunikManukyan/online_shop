@@ -2,47 +2,22 @@ package com.example.online_shop.service;
 
 
 import com.example.online_shop.model.Category;
-import com.example.online_shop.repository.CategoryRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
-@Service
-@RequiredArgsConstructor
-public class CategoryService {
 
-    private final CategoryRepository categoryRepository;
+public interface CategoryService {
 
-    public void save(Category category) {
 
-        if (categoryRepository.findByName(category.getName()) == null) {
-            categoryRepository.save(category);
-        }
+    void save(Category category);
 
-    }
+    void delete(Category category);
 
-    public void delete(Category category) {
-        categoryRepository.delete(category);
-    }
+    void deleteById(int categoryId);
 
-    public void deleteById(int categoryId) {
-        categoryRepository.deleteById(categoryId);
-    }
+    List<Category> findAllCategory();
 
-    public List<Category> findAllCategory() {
-        return categoryRepository.findAll();
-    }
-
-    public Category findCategoryById(int id) {
-        Optional<Category> byId = categoryRepository.findById(id);
-        if (byId.isPresent()) {
-
-            return byId.get();
-        }
-        return null;
-    }
+    Category findCategoryById(int id);
 
 
 }
