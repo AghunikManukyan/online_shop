@@ -9,7 +9,6 @@ import com.example.online_shop.service.MemoryService;
 import com.example.online_shop.service.MenuService;
 import com.example.online_shop.service.ProductService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

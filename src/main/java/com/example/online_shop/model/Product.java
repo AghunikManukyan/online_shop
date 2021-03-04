@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 
@@ -22,12 +24,14 @@ public class Product {
     private int id;
 
     @Column
+    @NotBlank(message = "Name is mandatory")
     private String name;
 
     @Column
     private String description;
 
     @Column
+    @NotNull
     private double price;
 
 
@@ -39,6 +43,7 @@ public class Product {
     private Menu menu;
 
     @Column(name = "pic_url")
+    @NotBlank(message = "Image is mandatory")
     private String picUrl;
 
     @ManyToMany()

@@ -20,6 +20,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Map;
@@ -43,7 +44,7 @@ public class UserEndpoint {
 
 
     @PostMapping("/addUser")
-    public ResponseEntity addUser(@RequestBody User user) throws IOException {
+    public ResponseEntity addUser(@Valid @RequestBody User user) throws IOException {
         if (userService.findByEmail(user.getEmail()) != null) {
             return ResponseEntity
                     .status(HttpStatus.CONFLICT)
@@ -167,7 +168,7 @@ public class UserEndpoint {
     }
 
     @PostMapping("/admin/addProduct")
-    public ResponseEntity addProduct(@RequestBody Product product) throws IOException {
+    public ResponseEntity addProduct(@Valid @RequestBody Product product) throws IOException {
 
 //        String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
 //        File picture = new File(imageUploadDir + File.separator + fileName);
