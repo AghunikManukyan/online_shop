@@ -1,5 +1,6 @@
 package com.example.online_shop.service.impl;
 
+import com.example.online_shop.exception.ResourceNotFoundException;
 import com.example.online_shop.model.Color;
 import com.example.online_shop.model.Memory;
 import com.example.online_shop.model.Menu;
@@ -32,26 +33,21 @@ public class ProductServiceImpl implements ProductService {
         productRepository.save(product);
     }
 
-
     public void deleteById(int id) {
         productRepository.deleteById(id);
     }
 
-
     public Product findProductById(int id) {
         Optional<Product> byId = productRepository.findById(id);
         if (byId.isPresent()) {
-
             return byId.get();
         }
-        return null;
+        throw new ResourceNotFoundException("Product not found"+byId.get().getName());
     }
-
 
     public List<Product> findAll() {
         return productRepository.findAll();
     }
-
 
     public List<Product> listSearch(String keyword) {
         if (keyword != null) {
@@ -71,7 +67,6 @@ public class ProductServiceImpl implements ProductService {
         }
     }
 
-
     public List<Product> findAllByMenuId(int id) {
         return productRepository.findAllByMenuId(id);
     }
@@ -81,11 +76,8 @@ public class ProductServiceImpl implements ProductService {
         for (Menu menu : menus) {
             for (Product product : findAllByMenuId(menu.getId())) {
                 products.add(product);
-
             }
-
         }
-
         return products;
     }
 
@@ -93,17 +85,11 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.filterByPrice(minPrice, maxPrice);
     }
 
-
     public List<Product> filterProductsByPriceAndColor(double minPrice, double maxPrice, int colorId) {
-
-
         return productRepository.filterByPriceAndColor(minPrice, maxPrice, colorId);
-
-
     }
 
     public List<Product> filterProductsByPriceAndMemory(double minPrice, double maxPrice, int memoryId) {
-
         return productRepository.filterByPriceAndMemory(minPrice, maxPrice, memoryId);
     }
 
@@ -112,32 +98,21 @@ public class ProductServiceImpl implements ProductService {
             int memoryId) {
         Color colorById = colorService.findColorById(colorId);
         Memory memoryById = memoryService.findMemoryById(memoryId);
-
         List<Product> allByColorsAndMemories = productRepository.findAllByColorsAndMemories(colorById, memoryById);
-
-
         return allByColorsAndMemories;
     }
 
     public List<Product> filterProductsByColor(
             int colorId) {
         Color colorById = colorService.findColorById(colorId);
-
-
         List<Product> allByColors = productRepository.findAllByColors(colorById);
-
-
         return allByColors;
     }
 
     public List<Product> filterProductsByMemory(
             int memoryId) {
         Memory memoryById = memoryService.findMemoryById(memoryId);
-
-
         List<Product> allByMemories = productRepository.findAllByMemories(memoryById);
-
-
         return allByMemories;
     }
 
@@ -145,7 +120,6 @@ public class ProductServiceImpl implements ProductService {
                                                                 double maxPrice,
                                                                 int colorId,
                                                                 int memoryId) {
-
         return productRepository.filterByPriceAndColorAndMemory(minPrice, maxPrice, colorId, memoryId);
     }
 }

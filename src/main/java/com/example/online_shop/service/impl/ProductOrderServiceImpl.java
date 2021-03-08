@@ -24,7 +24,6 @@ public class ProductOrderServiceImpl  implements ProductOrderService {
 
     public List<ProductOrder> findProductOrderByStatus(Status status) {
         return productOrderRepository.findAllByStatus(status);
-
     }
 
     public List<ProductOrder> findAllByUser(User user) {
@@ -33,12 +32,9 @@ public class ProductOrderServiceImpl  implements ProductOrderService {
 
     public Optional<ProductOrder> findProductOrderById(int id) {
         return productOrderRepository.findById(id);
-
     }
 
     public void deleteById(int id) {
         productOrderRepository.deleteById(id);
     }
-
-
 }

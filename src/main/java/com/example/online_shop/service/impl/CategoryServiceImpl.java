@@ -1,5 +1,6 @@
 package com.example.online_shop.service.impl;
 
+import com.example.online_shop.exception.ResourceNotFoundException;
 import com.example.online_shop.model.Category;
 import com.example.online_shop.repository.CategoryRepository;
 import com.example.online_shop.service.CategoryService;
@@ -16,11 +17,9 @@ public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository categoryRepository;
 
     public void save(Category category) {
-
         if (categoryRepository.findByName(category.getName()) == null) {
             categoryRepository.save(category);
         }
-
     }
 
     public void delete(Category category) {
@@ -35,13 +34,12 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryRepository.findAll();
     }
 
-    public Category findCategoryById(int id) {
+    public Category findCategoryById(int id){
         Optional<Category> byId = categoryRepository.findById(id);
         if (byId.isPresent()) {
-
             return byId.get();
         }
-        return null;
+        throw new ResourceNotFoundException("Category not found"+byId.get().getName());
     }
 
 

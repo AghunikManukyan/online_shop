@@ -22,12 +22,10 @@ public class ProductsServiceImpl implements ProductsService {
     }
 
     public List<Products> findAllByUser(User user) {
-
         return productsRepository.findAllByUser(user);
     }
 
     public List<Products> findAllByStatusAndUser(boolean status, User user) {
-
         return productsRepository.findAllByStatusAndUser(status, user);
     }
 

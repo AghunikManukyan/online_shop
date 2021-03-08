@@ -16,14 +16,11 @@ public class AddressServiceImpl implements AddressService {
 
 
     public void save(Address address) {
-
         addressRepository.save(address);
-
     }
 
     public Address findAddressByUser(User user) {
         return addressRepository.findAddressByUser(user);
-
     }
 
 

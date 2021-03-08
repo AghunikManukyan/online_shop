@@ -1,5 +1,6 @@
 package com.example.online_shop.service.impl;
 
+import com.example.online_shop.exception.ResourceNotFoundException;
 import com.example.online_shop.model.Color;
 import com.example.online_shop.repository.ColorRepository;
 import com.example.online_shop.service.ColorService;
@@ -19,10 +20,7 @@ public class ColorServiceImpl implements ColorService {
             if (colorRepository.findByColor(color.getColor()) == null) {
                 colorRepository.save(color);
             }
-
     }
-
-
 
     public void findAllCollor() {
         colorRepository.findAll();
@@ -31,9 +29,8 @@ public class ColorServiceImpl implements ColorService {
     public Color findColorById(int id) {
         Optional<Color> byId = colorRepository.findById(id);
         if (byId.isPresent()) {
-
             return byId.get();
         }
-        return null;
+        throw new ResourceNotFoundException("Collor not found"+byId.get().getColor());
     }
 }
