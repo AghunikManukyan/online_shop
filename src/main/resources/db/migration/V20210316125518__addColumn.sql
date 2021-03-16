@@ -1,0 +1,1 @@
+ALTER TABLE memory ADD COLUMN count_s INTEGER

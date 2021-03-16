@@ -1,2 +1,0 @@
-ALTER TABLE memory ADD COLUMN count INTEGER
-
